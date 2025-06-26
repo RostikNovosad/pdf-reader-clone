@@ -34,7 +34,7 @@ export function generatePdf(documentData: DocumentData, withDownload = false) {
   const fonts = {
     NotoSans: {
       normal: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Regular.ttf',
-      bold: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Bold.ttf',
+      // bold: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Bold.ttf',
       italics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Italic.ttf',
       bolditalics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-BoldItalic.ttf'
     }
