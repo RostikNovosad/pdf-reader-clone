@@ -2,7 +2,7 @@ import { DocumentData } from "./models/global";
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
-// pdfMake.vfs = pdfFonts.vfs;
+pdfMake.vfs = pdfFonts.vfs;
 
 export function generatePdf(documentData: DocumentData, withDownload = false) {
   const { Title, Sections } = documentData
@@ -47,7 +47,6 @@ export function generatePdf(documentData: DocumentData, withDownload = false) {
   };
   return new Promise((resolve, reject) => {
     const pdf = pdfMake.createPdf(docDefinition, undefined, fonts);
-    // const pdf = pdfMake.createPdf(docDefinition, undefined);
 
     if (withDownload) pdf.download('document.pdf');
 
@@ -55,6 +54,7 @@ export function generatePdf(documentData: DocumentData, withDownload = false) {
       if (blob) {
         resolve(blob);
       } else {
+        console.error('PdfMake повернув порожній Blob. Можливі причини: проблеми з контентом, шрифтами або внутрішня помилка pdfMake.');
         reject(new Error('Не вдалося згенерувати PDF Blob'));
       }
     });
