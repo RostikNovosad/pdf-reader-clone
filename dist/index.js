@@ -28,23 +28,24 @@ export function generatePdf(documentData, withDownload = false) {
             }
             return {};
         })];
-    const fonts = {
-        NotoSans: {
-            normal: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Regular.ttf',
-            bold: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Bold.ttf',
-            italics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Italic.ttf',
-            bolditalics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-BoldItalic.ttf'
-        }
-    };
+    // const fonts = {
+    //   NotoSans: {
+    //     normal: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Regular.ttf',
+    //     bold: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Bold.ttf',
+    //     italics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-Italic.ttf',
+    //     bolditalics: 'https://fonts-07cc13.gitlab.io/fonts/NotoSans-BoldItalic.ttf'
+    //   }
+    // };
     const docDefinition = {
         content,
         styles: { header: { fontSize: 18, bold: true, margin: [0, 0, 0, 10] } },
-        defaultStyle: {
-            font: 'NotoSans'
-        },
+        // defaultStyle: {
+        //   font: 'NotoSans'
+        // },
     };
     return new Promise((resolve, reject) => {
-        const pdf = pdfMake.createPdf(docDefinition, undefined, fonts);
+        // const pdf = pdfMake.createPdf(docDefinition, undefined, fonts);
+        const pdf = pdfMake.createPdf(docDefinition, undefined);
         if (withDownload)
             pdf.download('document.pdf');
         pdf.getBlob(blob => {
