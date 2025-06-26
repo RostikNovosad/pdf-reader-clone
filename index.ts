@@ -5,6 +5,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.vfs;
 
 export function generatePdf(documentData: DocumentData, withDownload = false) {
+  console.log("test 5");
   const { Title, Sections } = documentData
   const content = [{ text: Title, style: 'header' },
   ...Sections.map(section => {

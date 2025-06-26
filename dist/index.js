@@ -1,6 +1,8 @@
 import pdfMake from 'pdfmake/build/pdfmake';
-// pdfMake.vfs = pdfFonts.vfs;
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.vfs;
 export function generatePdf(documentData, withDownload = false) {
+    console.log("test 5");
     const { Title, Sections } = documentData;
     const content = [{ text: Title, style: 'header' },
         ...Sections.map(section => {
@@ -43,7 +45,6 @@ export function generatePdf(documentData, withDownload = false) {
     };
     return new Promise((resolve, reject) => {
         const pdf = pdfMake.createPdf(docDefinition, undefined, fonts);
-        // const pdf = pdfMake.createPdf(docDefinition, undefined);
         if (withDownload)
             pdf.download('document.pdf');
         pdf.getBlob(blob => {
@@ -51,6 +52,7 @@ export function generatePdf(documentData, withDownload = false) {
                 resolve(blob);
             }
             else {
+                console.error('PdfMake повернув порожній Blob. Можливі причини: проблеми з контентом, шрифтами або внутрішня помилка pdfMake.');
                 reject(new Error('Не вдалося згенерувати PDF Blob'));
             }
         });
